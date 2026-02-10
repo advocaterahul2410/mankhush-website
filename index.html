@@ -1,81 +1,222 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<title>Mano Shanti – Order Online</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MANO SHANTI Cloud Kitchen</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
 <style>
-body{font-family:Arial;background:#fafafa;margin:0}
-header{background:#fff;padding:15px;display:flex;justify-content:space-between}
-.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:20px}
-.card{background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
-.card img{width:100%;height:150px;object-fit:cover;border-radius:8px}
-button{background:#000;color:#fff;border:none;padding:8px 12px;border-radius:5px}
-.cart{background:#fff;margin:20px;padding:15px;border-radius:10px}
-.apps img{height:30px;opacity:.6}
+
+body{
+font-family:Poppins;
+margin:0;
+background:#fff7f0;
+}
+
+header{
+background:#7a1f1f;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+.menu{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:14px;
+box-shadow:0 5px 15px rgba(0,0,0,.1);
+padding:15px;
+text-align:center;
+}
+
+.card img{
+width:100%;
+height:200px;
+object-fit:cover;
+border-radius:10px;
+}
+
+button{
+background:#7a1f1f;
+color:white;
+border:none;
+padding:10px 16px;
+border-radius:8px;
+cursor:pointer;
+margin-top:8px;
+}
+
+.cart{
+position:fixed;
+right:20px;
+bottom:20px;
+background:white;
+padding:15px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,.2);
+width:250px;
+}
+
+.qr{
+display:block;
+margin:20px auto;
+width:220px;
+}
+
+.footer{
+background:#222;
+color:white;
+text-align:center;
+padding:20px;
+margin-top:40px;
+}
+
+.logoSmall{
+width:70px;
+margin:6px;
+}
+
 </style>
 </head>
 
 <body>
 
 <header>
-<h2>MANO SHANTI</h2>
-<div class="apps">
-<img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png">
-<img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png">
-<div style="font-size:12px">Coming Soon</div>
-</div>
+<h1>MANO SHANTI CLOUD KITCHEN</h1>
+<p>Pure Veg | Premium Homemade</p>
 </header>
 
-<div class="menu" id="menu"></div>
+<h2 style="text-align:center">Menu</h2>
+
+<div class="menu">
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1601050690597-df0568f70950">
+<h3>Premium Desi Ghee Gujiya</h3>
+<p>₹800 / Kg</p>
+<button onclick="addItem('Gujiya',800)">Add to Cart</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1631452180519-c014fe946bc7">
+<h3>Katori Chaat</h3>
+<p>₹200 Per Katori (Min 10)</p>
+<button onclick="addItem('Katori Chaat',200)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1631515243349-e0cb75fb8d3a">
+<h3>Dahi Bhalla</h3>
+<p>₹200 Per Plate</p>
+<button onclick="addItem('Dahi Bhalla',200)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://images.unsplash.com/photo-1612197599080-5d54cdd4c5b1">
+<h3>Premium Thandai</h3>
+<p>₹150 Per Glass</p>
+<button onclick="addItem('Thandai',150)">Add</button>
+</div>
+
+</div>
+
+<h2 style="text-align:center">Scan & Pay</h2>
+
+<!-- QR FROM ROOT -->
+<img src="upi-qr.jpg" class="qr">
 
 <div class="cart">
 <h3>Cart</h3>
 <div id="cartItems"></div>
-<h3>Total ₹<span id="total">0</span></h3>
-<button onclick="orderWhatsApp()">Order on WhatsApp</button>
+<h4>Total ₹ <span id="total">0</span></h4>
+
+<button onclick="downloadInvoice()">Download Invoice</button>
+<button onclick="sendWhatsApp()">Order WhatsApp</button>
+</div>
+
+<div class="footer">
+<h3>Delivery Partners</h3>
+
+<img class="logoSmall" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png">
+<p>Coming Soon</p>
+
+<img class="logoSmall" src="https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png">
+<p>Coming Soon</p>
+
 </div>
 
 <script>
-const phone="91XXXXXXXXXX"; // your WhatsApp number
-
-const items=[
-{name:"Dahi Bhalla",price:200,img:"https://upload.wikimedia.org/wikipedia/commons/3/36/Dahi_Bhalla.jpg"},
-{name:"Katori Chaat (min 10)",price:2000,img:"https://upload.wikimedia.org/wikipedia/commons/5/5e/Katori_chaat.jpg"},
-{name:"Premium Thandai",price:150,img:"https://upload.wikimedia.org/wikipedia/commons/9/9d/Thandai.jpg"},
-{name:"Desi Ghee Gujiya (1kg)",price:800,img:"https://upload.wikimedia.org/wikipedia/commons/7/73/Gujiya.jpg"}
-];
 
 let cart=[];
 
-function render(){
-const m=document.getElementById("menu");
-items.forEach(i=>{
-m.innerHTML+=`
-<div class="card">
-<img src="${i.img}">
-<h4>${i.name}</h4>
-₹${i.price}<br><br>
-<button onclick='add(${JSON.stringify(i)})'>Add</button>
-</div>`});
+function addItem(name,price){
+cart.push({name,price});
+renderCart();
 }
 
-function add(i){cart.push(i);update()}
-
-function update(){
-let t=0;document.getElementById("cartItems").innerHTML="";
-cart.forEach(i=>{t+=i.price;cartItems.innerHTML+=`${i.name} – ₹${i.price}<br>`});
-total.innerText=t;
-}
-
-function orderWhatsApp(){
-let invoice=`MANO SHANTI%0AInvoice No: MS-${Date.now()}%0A%0A`;
+function renderCart(){
+let html="";
 let total=0;
-cart.forEach(i=>{invoice+=`${i.name} – ₹${i.price}%0A`;total+=i.price});
-invoice+=`%0ATotal: ₹${total}%0APlease share payment confirmation.`;
-window.open(`https://wa.me/${phone}?text=${invoice}`);
+
+cart.forEach(i=>{
+html+=i.name+" ₹"+i.price+"<br>";
+total+=i.price;
+});
+
+document.getElementById("cartItems").innerHTML=html;
+document.getElementById("total").innerText=total;
 }
 
-render();
+function downloadInvoice(){
+
+const { jsPDF } = window.jspdf;
+let doc=new jsPDF();
+
+let y=20;
+doc.text("MANO SHANTI INVOICE",20,y);
+y+=10;
+
+let total=0;
+
+cart.forEach(i=>{
+doc.text(i.name+" ₹"+i.price,20,y);
+y+=10;
+total+=i.price;
+});
+
+doc.text("TOTAL ₹"+total,20,y+10);
+
+doc.save("ManoShantiInvoice.pdf");
+
+}
+
+function sendWhatsApp(){
+
+let msg="MANO SHANTI ORDER%0A";
+let total=0;
+
+cart.forEach(i=>{
+msg+=i.name+" ₹"+i.price+"%0A";
+total+=i.price;
+});
+
+msg+="TOTAL ₹"+total+"%0APaid via UPI QR";
+
+window.open("https://wa.me/918209520964?text="+msg);
+
+}
+
 </script>
 
 </body>
