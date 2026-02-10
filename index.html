@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mankhush Homemade Delights</title>
+
+<style>
+body{font-family:Arial;margin:0;background:#fff7f0}
+header{background:#ff6b00;color:white;padding:18px;text-align:center;font-size:24px;font-weight:bold}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;padding:20px}
+.card{background:white;border-radius:14px;padding:15px;box-shadow:0 3px 10px rgba(0,0,0,0.1)}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+button{background:#ff6b00;color:white;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
+.cart{position:fixed;right:15px;bottom:15px;background:white;width:300px;padding:15px;border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,0.2)}
+.qr{width:220px;display:block;margin:10px auto}
+input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1px solid #ccc}
+</style>
+
+</head>
+<body>
+
+<header>Mankhush Homemade Delights — Pure Veg Banaras Taste</header>
+
+<div class="menu">
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Gujiya.jpg">
+<h3>Desi Ghee Gujiya</h3>
+<p>₹800 / KG</p>
+<button onclick="add('Gujiya',800)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Thandai.jpg">
+<h3>Premium Holi Thandai</h3>
+<p>₹100 / Glass</p>
+<button onclick="add('Thandai',100)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Masala_Chai.JPG">
+<h3>Special Banarasi Tea</h3>
+<p>₹25 / Glass</p>
+<button onclick="add('Tea',25)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/9/9d/Katori_chaat.jpg">
+<h3>Special Katori Chaat</h3>
+<p>₹200 / Piece (Min 10)</p>
+<button onclick="add('Katori Chaat',200)">Add</button>
+</div>
+
+<div class="card">
+<img src="https://upload.wikimedia.org/wikipedia/commons/2/2c/Dahi_vada.jpg">
+<h3>Dahi Bhalle</h3>
+<p>₹175 / Plate</p>
+<button onclick="add('Dahi Bhalle',175)">Add</button>
+</div>
+
+</div>
+
+<div class="cart">
+<h3>Your Cart</h3>
+<div id="cart"></div>
+<h4>Total ₹ <span id="total">0</span></h4>
+
+<h4>Customer Details</h4>
+<input id="name" placeholder="Name">
+<input id="phone" placeholder="Phone">
+<textarea id="addr" placeholder="Address"></textarea>
+
+<h4>Scan & Pay</h4>
+<img src="upi-qr.jpg" class="qr">
+
+<button onclick="order()">Confirm Order</button>
+</div>
+
+<script>
+let cart=[];
+
+function add(name,price){
+cart.push({name,price});
+draw();
+}
+
+function draw(){
+let html="";
+let total=0;
+cart.forEach(i=>{
+html+=i.name+" ₹"+i.price+"<br>";
+total+=i.price;
+});
+document.getElementById("cart").innerHTML=html;
+document.getElementById("total").innerText=total;
+}
+
+function order(){
+let n=name.value;
+let p=phone.value;
+let a=addr.value;
+if(!n||!p||!a||cart.length==0){alert("Fill all + add items");return;}
+let msg="Order:%0A";
+cart.forEach(i=>msg+=i.name+" ₹"+i.price+"%0A");
+msg+="Name:"+n+"%0APhone:"+p+"%0AAddress:"+a;
+window.open("https://wa.me/918209520964?text="+msg);
+alert("After payment, confirm on WhatsApp");
+}
+</script>
+
+</body>
+</html>
