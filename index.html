@@ -66,13 +66,20 @@ let t=0;document.getElementById("cartItems").innerHTML="";
 cart.forEach(i=>{t+=i.price;cartItems.innerHTML+=`${i.name} – ₹${i.price}<br>`});
 total.innerText=t;
 }
-
 function orderWhatsApp(){
 let invoice=`MANO SHANTI%0AInvoice No: MS-${Date.now()}%0A%0A`;
 let total=0;
-cart.forEach(i=>{invoice+=`${i.name} – ₹${i.price}%0A`;total+=i.price});
+
+cart.forEach(i=>{
+invoice+=`${i.name} – ₹${i.price}%0A`;
+total+=i.price;
+});
+
 invoice+=`%0ATotal: ₹${total}%0APlease share payment confirmation.`;
-window.open(`https://wa.me/${phone}?text=${invoice}`);
+
+window.open(`https://wa.me/918209520964?text=${invoice}`);
+}
+
 }
 
 render();
