@@ -7,7 +7,8 @@
 <style>
 body{font-family:Arial;margin:0;background:#fff7f0}
 header{background:#ff6b00;color:#fff;padding:18px;text-align:center;font-size:24px;font-weight:bold}
-.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;padding:20px}
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:20px}
+@media(max-width:700px){.menu{grid-template-columns:1fr}}px){.menu{grid-template-columns:1fr}}
 .card{background:#fff;border-radius:14px;padding:15px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
 .card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
 button{background:#ff6b00;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
@@ -22,9 +23,7 @@ input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1p
 <body>
 <header>Mankhush Home Delights — Pure Veg Banaras Taste</header>
 
-<div class="menu">
-  <div class="card">
-    <h3>Order Online</h3>
+<div</h3>
     <button disabled style="background:#ccc;cursor:not-allowed">Zomato – Coming Soon</button>
     <button disabled style="background:#ccc;cursor:not-allowed;margin-left:6px">Swiggy – Coming Soon</button>
   </div>
@@ -78,11 +77,15 @@ input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1p
 let cart = {};
 let cartVisible = false;
 
-function add(name, price){
+function add(name, function add(name, price){
   if(!cart[name]){
-    cart[name] = {price: price, qty: 0};
+    cart[name] = { price: price, qty: 1 };
+  } else {
+    cart[name].qty += 1;
   }
-  cart[name].qty += 1;
+  draw();
+  showCart();
+}qty += 1;
   draw();
   showCart();
 }
@@ -106,13 +109,21 @@ function draw(){
 }
 
 function order(){
+ function order(){
   let n = name.value.trim();
   let p = phone.value.trim();
   let a = addr.value.trim();
-  if(!n||!p||!a||Object.keys(cart).length==0){
-    alert('Please fill all details and add items');return;
-  }
+  if(!n || !p || !a){ alert('Please fill all customer details'); return; }
+  if(Object.keys(cart).length === 0){ alert('Cart is empty'); return; }
+
   let total = document.getElementById('total').innerText;
+  let msg = `*Mankhush Home Delights*%0A🧾 Invoice%0A`;
+  for(let i in cart){
+    msg += `${i} x ${cart[i].qty} = ₹${cart[i].qty*cart[i].price}%0A`;
+  }
+  msg += `%0A💰 Total: ₹${total}%0A%0A👤 ${n}%0A📞 ${p}%0A🏠 ${a}%0A%0A✅ Payment Done`;
+  window.open('https://wa.me/918209520964?text=' + encodeURIComponent(msg),'_blank');
+}ment.getElementById('total').innerText;
   let msg = `*Mankhush Home Delights*%0A%0A🧾 Invoice:%0A`;
   for(let i in cart){
     msg += `${i} x ${cart[i].qty} = ₹${cart[i].qty*cart[i].price}%0A`;
@@ -131,7 +142,7 @@ function showCart(){
   document.getElementById('cartBox').style.display = 'block';
 }
   let total = document.getElementById('total').innerText;
-  let msg = `*Mankhush Home Delights*%0A%0AInvoice:%0A`;
+  let msg = `*Manjhush Home Delights*%0A%0AInvoice:%0A`;
   for(let i in cart){
     msg += `${i} x ${cart[i].qty} = ₹${cart[i].qty*cart[i].price}%0A`;
   }
