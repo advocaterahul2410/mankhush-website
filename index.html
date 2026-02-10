@@ -3,473 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MANKHUSH HOME DELIGHTSn</title>
-
-<title>MANKHUSH HOME DELIGHTS</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
+<title>Manjhush Home Delights</title>
 <style>
-:root{
-  --saffron:#ff8f3f;
-  --gulal-pink:#ff5cb8;
-  --holi-purple:#7f4dff;
-  --mint:#42d392;
-  --deep-maroon:#7a1f1f;
-}
-
-*{box-sizing:border-box;}
-
-body{
-font-family:Poppins;
-margin:0;
-background:#fff7f0;
-  font-family:Poppins, sans-serif;
-  margin:0;
-  background:linear-gradient(130deg,#fff7f0 0%,#fff1ff 45%,#f0fff8 100%);
-  color:#34191c;
-}
-
-header{
-background:#7a1f1f;
-color:white;
-padding:20px;
-text-align:center;
-  background:linear-gradient(110deg,var(--deep-maroon),#c93677 48%,var(--holi-purple));
-  color:white;
-  padding:28px 16px;
-  text-align:center;
-  position:relative;
-  overflow:hidden;
-}
-
-header::after{
-  content:"";
-  position:absolute;
-  inset:auto -20% -55px;
-  height:120px;
-  background:radial-gradient(circle at 20% 20%,rgba(255,143,63,.5),transparent 45%),
-             radial-gradient(circle at 70% 25%,rgba(66,211,146,.45),transparent 40%),
-             radial-gradient(circle at 55% 80%,rgba(255,92,184,.55),transparent 45%);
-}
-
-.holi-banner{
-  margin:16px auto 0;
-  max-width:780px;
-  border-radius:14px;
-  background:linear-gradient(90deg,#ffeb99,#ffd2f3,#d8d0ff,#c8ffdf);
-  color:#4a1848;
-  padding:10px 14px;
-  font-weight:700;
-  box-shadow:0 8px 20px rgba(85,35,95,.25);
-}
-
-.stats{
-  display:flex;
-  justify-content:center;
-  gap:14px;
-  flex-wrap:wrap;
-  margin:18px auto;
-  padding:0 14px;
-}
-
-.stat-card{
-  min-width:170px;
-  background:white;
-  border-radius:14px;
-  padding:12px;
-  text-align:center;
-  box-shadow:0 6px 18px rgba(122,31,31,.15);
-  border:1px solid rgba(127,77,255,.16);
-}
-
-.stat-label{
-  font-size:.86rem;
-  color:#7c356a;
-}
-
-.stat-value{
-  font-size:1.35rem;
-  font-weight:700;
-  color:#4d1438;
-}
-
-h2.section-title{
-  text-align:center;
-  color:#6d1d43;
-  margin:12px 0 0;
-}
-
-.menu{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:20px;
-padding:20px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:20px;
-  padding:20px;
-}
-
-.card{
-background:white;
-border-radius:14px;
-box-shadow:0 5px 15px rgba(0,0,0,.1);
-padding:15px;
-text-align:center;
-  background:white;
-  border-radius:16px;
-  box-shadow:0 8px 24px rgba(0,0,0,.12);
-  padding:15px;
-  text-align:center;
-  border:1px solid rgba(255,143,63,.3);
-  transition:transform .3s ease, box-shadow .3s ease;
-}
-
-.card:hover{
-  transform:translateY(-6px);
-  box-shadow:0 14px 26px rgba(71,15,58,.2);
-}
-
-.card img{
-width:100%;
-height:200px;
-object-fit:cover;
-border-radius:10px;
-  width:100%;
-  height:200px;
-  object-fit:cover;
-  border-radius:12px;
-  transition:transform .35s ease, filter .35s ease;
-  transform:perspective(700px) rotateY(var(--rx,0deg)) rotateX(var(--ry,0deg)) scale(1);
-  will-change:transform;
-}
-
-button{
-background:#7a1f1f;
-color:white;
-border:none;
-padding:10px 16px;
-border-radius:8px;
-cursor:pointer;
-margin-top:8px;
-.card:hover img{
-  filter:saturate(1.15) contrast(1.06);
-}
-
-.cart{
-position:fixed;
-right:20px;
-bottom:20px;
-background:white;
-padding:15px;
-border-radius:12px;
-box-shadow:0 5px 20px rgba(0,0,0,.2);
-width:250px;
-button{
-  background:linear-gradient(90deg,var(--deep-maroon),#cf2d79);
-  color:white;
-  border:none;
-  padding:10px 16px;
-  border-radius:999px;
-  cursor:pointer;
-  margin-top:8px;
-  font-weight:600;
-}
-
-button:hover{ filter:brightness(1.08); }
-
-.qr{
-display:block;
-margin:20px auto;
-width:220px;
-  display:block;
-  margin:18px auto;
-  width:min(72vw,180px);
-  border-radius:16px;
-  border:6px solid white;
-  box-shadow:0 10px 26px rgba(52,25,28,.2);
-}
-
-.footer{
-background:#222;
-color:white;
-text-align:center;
-padding:20px;
-margin-top:40px;
-.cart{
-  position:fixed;
-  right:20px;
-  bottom:20px;
-  background:white;
-  padding:15px;
-  border-radius:12px;
-  box-shadow:0 5px 20px rgba(0,0,0,.2);
-  width:270px;
-  border:1px solid rgba(127,77,255,.2);
-}
-
-.logoSmall{
-width:70px;
-margin:6px;
-.footer{
-  background:linear-gradient(90deg,#34191c,#601f68);
-  color:white;
-  text-align:center;
-  padding:20px;
-  margin-top:40px;
-}
-
-.logoSmall{ width:46px; margin:4px; }
-
-@media (max-width:768px){
-  .cart{ position:static; width:calc(100% - 30px); margin:10px auto 20px; }
-}
+body{font-family:Arial;margin:0;background:#fff7f0}
+header{background:#ff6b00;color:#fff;padding:18px;text-align:center;font-size:24px;font-weight:bold}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;padding:20px}
+.card{background:#fff;border-radius:14px;padding:15px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
+.card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+button{background:#ff6b00;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
+.cart{position:fixed;right:15px;bottom:15px;background:#fff;width:320px;padding:15px;border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,.2);max-height:90vh;overflow:auto}
+.qr{width:220px;display:block;margin:10px auto}
+input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1px solid #ccc}
+.small{font-size:13px;color:#666}
+.item{display:flex;justify-content:space-between;margin:6px 0}
 </style>
 </head>
-
 <body>
-
-<header>
-<h1>MANKHUSH HOME DELIGHTS </h1>
-<p>Pure Veg | Premium Homemade</p>
-  <h1>MANKHUSH HOME DELIGHTS</h1>
-  <p>Pure Veg | Premium Homemade</p>
-  <div class="holi-banner">🌈 Happy Holi! Celebrate with colorful flavors, sweet moments, and festive treats. 🥳</div>
-</header>
-
-<h2 style="text-align:center">Menu</h2>
+<header>Manjhush Home Delights — Pure Veg Banaras Taste</header>
 
 <div class="menu">
   <div class="card">
-    <img class="interactive-image" src="thandai.jpg?v=3" alt="Premium Thandai">
-    <h3>Premium Thandai</h3>
-    <p>₹150 Per Glass</p>
-    <button onclick="addItem('Thandai',150)">Add</button>
+    <img src="gujiya.jpg">
+    <h3>Desi Ghee Gujiya</h3>
+    <p>₹800 / KG</p>
+    <button onclick="add('Gujiya',800)">Add</button>
+  </div>
+
+  <div class="card">
+    <img src="thandai.jpg">
+    <h3>Premium Holi Thandai</h3>
+    <p>₹100 / Glass</p>
+    <button onclick="add('Thandai',100)">Add</button>
+  </div>
+
+  <div class="card">
+    <img src="katorichaat.jpg">
+    <h3>Special Katori Chaat</h3>
+    <p>₹200 / Piece</p>
+    <button onclick="add('Katori Chaat',200)">Add</button>
+  </div>
+
+  <div class="card">
+    <img src="dahibhalle.jpg">
+    <h3>Dahi Bhalle</h3>
+    <p>₹175 / Plate</p>
+    <button onclick="add('Dahi Bhalle',175)">Add</button>
   </div>
 </div>
 
-<h2 style="text-align:center">Scan & Pay</h2>
-
-<!-- QR FROM ROOT -->
-<img src="upiscanner.jpeg?v=2" class="qr">
-<h2 class="section-title">Scan & Pay</h2>
-<img src="upiscanner.jpeg?v=3" class="qr" alt="UPI QR code">
-
 <div class="cart">
-<h3>Cart</h3>
-<div id="cartItems"></div>
+<h3>Your Cart</h3>
+<div id="cart"></div>
 <h4>Total ₹ <span id="total">0</span></h4>
-  <h3>Cart</h3>
-  <div id="cartItems"></div>
-  <h4>Total ₹ <span id="total">0</span></h4>
 
-<button onclick="downloadInvoice()">Download Invoice</button>
-  <button onclick="sendWhatsApp()">Order WhatsApp</button>
-</div>
+<h4>Customer Details</h4>
+<input id="name" placeholder="Full Name">
+<input id="phone" placeholder="WhatsApp Number">
+<textarea id="addr" placeholder="Delivery Address"></textarea>
 
-<div class="footer">
-<h3>Delivery Partners</h3>
-<img class="logoSmall" src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png">
-<p>Coming Soon</p>
- <h3>Delivery Partners</h3>
-  <img class="logoSmall" src="https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png" alt="Swiggy logo">
-  <p>Coming Soon</p>
+<h4>Scan & Pay</h4>
+<img src="upiscanner.jpg" class="qr">
+<p class="small">After payment, click Confirm Order</p>
+<button onclick="order()">Confirm Order</button>
 </div>
 
 <script>
+let cart = {};
 
-let cart=[];
-const baseHappyCustomers=12500;
-
-function addItem(name,price){
-cart.push({name,price});
-renderCart();
+function add(name, price){
+  if(!cart[name]) cart[name] = {price, qty:0};
+  cart[name].qty++;
+  draw();
 }
 
-function renderCart(){
-let html="";
-let total=0;
-  const existingItem=cart.find(item=>item.name===name);
-
-cart.forEach(i=>{
-html+=i.name+" ₹"+i.price+"<br>";
-total+=i.price;
-});
-  if(existingItem){
-    existingItem.qty+=1;
-  }else{
-    cart.push({name,price,qty:1});
+function draw(){
+  let html = '';
+  let total = 0;
+  for(let i in cart){
+    let item = cart[i];
+    let amt = item.qty * item.price;
+    total += amt;
+    html += `<div class='item'>${i} x ${item.qty}<span>₹${amt}</span></div>`;
   }
-
-document.getElementById("cartItems").innerHTML=html;
-document.getElementById("total").innerText=total;
-  renderCart();
+  document.getElementById('cart').innerHTML = html || '<p>No items</p>';
+  document.getElementById('total').innerText = total;
 }
 
-function downloadInvoice(){
-
-const { jsPDF } = window.jspdf;
-let doc=new jsPDF();
-
-let y=20;
-doc.text("MANKHUSH",20,y);
-y+=10;
-
-let total=0;
-
-cart.forEach(i=>{
-doc.text(i.name+" ₹"+i.price,20,y);
-y+=10;
-total+=i.price;
-});
-function getCartSummary(){
-  return cart.reduce((summary,item)=>{
-    summary.total += item.price * item.qty;
-    summary.count += item.qty;
-    return summary;
-  },{total:0,count:0});
+function order(){
+  let n = name.value.trim();
+  let p = phone.value.trim();
+  let a = addr.value.trim();
+  if(!n||!p||!a||Object.keys(cart).length==0){
+    alert('Please fill all details and add items');return;
+  }
+  let total = document.getElementById('total').innerText;
+  let msg = `*Manjhush Home Delights*%0A%0AInvoice:%0A`;
+  for(let i in cart){
+    msg += `${i} x ${cart[i].qty} = ₹${cart[i].qty*cart[i].price}%0A`;
+  }
+  msg += `%0ATotal: ₹${total}%0A%0AName: ${n}%0APhone: ${p}%0AAddress: ${a}%0A%0APayment Done ✅`;
+  window.open(`https://wa.me/91${p}?text=${msg}`,'_blank');
 }
-
-doc.text("TOTAL ₹"+total,20,y+10);
-function renderCart(){
-  if(cart.length===0){
-    document.getElementById("cartItems").innerHTML="Your festive cart is empty.";
-    document.getElementById("total").innerText=0;
-    document.getElementById("orderCount").innerText=0;
-    document.getElementById("happyCustomers").innerText=`${baseHappyCustomers.toLocaleString()}+`;
-    return;
-  }
-
-  let html="";
-
-  cart.forEach(item=>{
-    const lineTotal=item.price * item.qty;
-    html+=`${item.name} x ${item.qty} — ₹${lineTotal}<br>`;
-  });
-
-  const summary=getCartSummary();
-  document.getElementById("cartItems").innerHTML=html;
-  document.getElementById("total").innerText=summary.total;
-  document.getElementById("orderCount").innerText=summary.count;
-  document.getElementById("happyCustomers").innerText=`${(baseHappyCustomers + summary.count).toLocaleString()}+`;
-}
-
-doc.save("ManokhushInvoice.pdf");
-function getCustomerDetailsForOrder(){
-  const customerName=prompt("Enter customer name:");
-  if(customerName===null){
-    return null;
-  }
-
-  const customerAddress=prompt("Enter customer address:");
-  if(customerAddress===null){
-    return null;
-  }
-
-  return {
-    name:customerName.trim() || "Not provided",
-    address:customerAddress.trim() || "Not provided"
-  };
-}
-
-function downloadInvoice(){
-  if(cart.length===0){
-    alert("Please add items to cart before downloading invoice.");
-    return;
-  }
-
-  const customerDetails=getCustomerDetailsForOrder();
-  if(!customerDetails){
-    return;
-  }
-
-  const { jsPDF } = window.jspdf;
-  const doc=new jsPDF();
-
-  let y=20;
-  doc.text("MANKHUSH HOLI ORDER",20,y);
-  y+=10;
-
-  doc.text(`Customer: ${customerDetails.name}`,20,y);
-  y+=8;
-  doc.text(`Address: ${customerDetails.address}`,20,y);
-  y+=12;
-
-  let total=0;
-  cart.forEach(item=>{
-    const lineTotal=item.price * item.qty;
-    doc.text(`${item.name} x ${item.qty} ₹${lineTotal}`,20,y);
-    y+=10;
-    total+=lineTotal;
-  });
-
-  doc.text(`TOTAL ₹${total}`,20,y+10);
-  doc.save("MankhushInvoice.pdf");
-}
-
-function sendWhatsApp(){
-  if(cart.length===0){
-    alert("Please add items to cart before placing WhatsApp order.");
-    return;
-  }
-
-  const customerDetails=getCustomerDetailsForOrder();
-  if(!customerDetails){
-    return;
-  }
-
-  let msg="MANKHUSH HOLI ORDER%0A";
-  msg+=`Customer: ${encodeURIComponent(customerDetails.name)}%0A`;
-  msg+=`Address: ${encodeURIComponent(customerDetails.address)}%0A`;
-
-  let total=0;
-  cart.forEach(item=>{
-    const lineTotal=item.price * item.qty;
-    msg+=`${encodeURIComponent(item.name)} x ${item.qty} - ₹${lineTotal}%0A`;
-    total+=lineTotal;
-  });
-
-  msg+=`TOTAL ₹${total}%0APlease confirm this order.%0A`;
-  window.open(`https://wa.me/918209520964?text=${msg}`);
-}
-
-let msg="MANKHUSH ORDER%0A";
-let total=0;
-
-cart.forEach(i=>{
-msg+=i.name+" ₹"+i.price+"%0A";
-total+=i.price;
-});
-
-msg+="TOTAL ₹"+total+"%0APaid via UPI QR";
-
-window.open("https://wa.me/918209520964?text="+msg);
-
-function activateInteractiveImages(){
-  const images=document.querySelectorAll('.interactive-image');
-
-  images.forEach(img=>{
-    img.addEventListener('mousemove',(e)=>{
-      const rect=img.getBoundingClientRect();
-      const x=((e.clientX-rect.left)/rect.width)-0.5;
-      const y=((e.clientY-rect.top)/rect.height)-0.5;
-      img.style.setProperty('--rx',`${x*10}deg`);
-      img.style.setProperty('--ry',`${-y*10}deg`);
-    });
-
-    img.addEventListener('mouseleave',()=>{
-      img.style.setProperty('--rx','0deg');
-      img.style.setProperty('--ry','0deg');
-    });
-  });
-}
-
-activateInteractiveImages();
-renderCart();
 </script>
-
 </body>
 </html>
