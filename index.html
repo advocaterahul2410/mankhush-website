@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>MANO SHANTI Cloud Kitchen</title>
+<title>Mankhush Home Delights</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
 
@@ -65,7 +65,7 @@ background:white;
 padding:15px;
 border-radius:12px;
 box-shadow:0 5px 20px rgba(0,0,0,.2);
-width:250px;
+width:260px;
 }
 
 .qr{
@@ -83,7 +83,7 @@ margin-top:40px;
 }
 
 .logoSmall{
-width:70px;
+width:60px;
 margin:6px;
 }
 
@@ -93,7 +93,7 @@ margin:6px;
 <body>
 
 <header>
-<h1>MANO SHANTI CLOUD KITCHEN</h1>
+<h1>MANKHUSH HOME DELIGHTS</h1>
 <p>Pure Veg | Premium Homemade</p>
 </header>
 
@@ -133,7 +133,6 @@ margin:6px;
 
 <h2 style="text-align:center">Scan & Pay</h2>
 
-<!-- QR FROM ROOT -->
 <img src="upi-qr.jpg" class="qr">
 
 <div class="cart">
@@ -184,7 +183,7 @@ const { jsPDF } = window.jspdf;
 let doc=new jsPDF();
 
 let y=20;
-doc.text("MANO SHANTI INVOICE",20,y);
+doc.text("Mankhush Home Delights Invoice",20,y);
 y+=10;
 
 let total=0;
@@ -197,13 +196,13 @@ total+=i.price;
 
 doc.text("TOTAL ₹"+total,20,y+10);
 
-doc.save("ManoShantiInvoice.pdf");
+doc.save("MankhushInvoice.pdf");
 
 }
 
 function sendWhatsApp(){
 
-let msg="MANO SHANTI ORDER%0A";
+let msg="MANKHUSH HOME DELIGHTS ORDER%0A";
 let total=0;
 
 cart.forEach(i=>{
