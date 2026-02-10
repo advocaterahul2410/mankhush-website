@@ -3,151 +3,132 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Manjhush Home Delights</title>
+<title>Mankhush Home Delights</title>
 <style>
-body{font-family:Arial;margin:0;background:#fff7f0}
-header{background:#ff6b00;color:#fff;padding:18px;text-align:center;font-size:24px;font-weight:bold}
-.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;padding:20px}
-@media(max-width:700px){.menu{grid-template-columns:1fr}}px){.menu{grid-template-columns:1fr}}
-.card{background:#fff;border-radius:14px;padding:15px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
-.card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
+body{margin:0;font-family:Arial;background:#fff7f0}
+header{background:#ff6b00;color:#fff;text-align:center;padding:18px;font-size:24px;font-weight:bold}
+
+.menu{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;padding:20px}
+@media(max-width:700px){.menu{grid-template-columns:1fr}}
+
+.card{background:#fff;border-radius:14px;box-shadow:0 3px 10px rgba(0,0,0,.1);padding:12px}
+.card img{width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px}
+.card h3{margin:10px 0 4px}
+.card p{margin:0}
 button{background:#ff6b00;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
-.cart{position:fixed;right:0;top:50%;transform:translateY(-50%);background:#fff;width:300px;padding:12px;border-radius:14px 0 0 14px;box-shadow:-3px 0 12px rgba(0,0,0,.2);max-height:80vh;overflow:auto}
-.toggle{position:fixed;right:0;top:50%;transform:translateY(-50%);background:#ff6b00;color:#fff;padding:10px;border-radius:10px 0 0 10px;cursor:pointer;font-weight:bold}
-.qr{width:220px;display:block;margin:10px auto}
-input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1px solid #ccc}
+
+.cart-btn{position:fixed;bottom:15px;right:15px;background:#ff6b00;color:#fff;padding:14px 18px;border-radius:30px;font-size:16px;cursor:pointer;z-index:1000}
+
+.cart-popup{position:fixed;left:0;right:0;bottom:0;background:#fff;border-radius:18px 18px 0 0;box-shadow:0 -4px 15px rgba(0,0,0,.25);padding:18px;max-height:85vh;overflow:auto;display:none;z-index:1001}
+.cart-item{display:flex;justify-content:space-between;margin:6px 0}
 .small{font-size:13px;color:#666}
-.item{display:flex;justify-content:space-between;margin:6px 0}
+input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1px solid #ccc}
+
+.footer{padding:30px;text-align:center}
+.footer button{background:#ccc;color:#444;cursor:not-allowed;margin:0 8px}
 </style>
 </head>
 <body>
+
 <header>Mankhush Home Delights — Pure Veg Banaras Taste</header>
 
-<div</h3>
-    <button disabled style="background:#ccc;cursor:not-allowed">Zomato – Coming Soon</button>
-    <button disabled style="background:#ccc;cursor:not-allowed;margin-left:6px">Swiggy – Coming Soon</button>
-  </div>
+<div class="menu">
   <div class="card">
     <img src="gujiya.jpg">
     <h3>Desi Ghee Gujiya</h3>
     <p>₹800 / KG</p>
-    <button onclick="add('Gujiya',800)">Add</button>
+    <button onclick="addItem('Gujiya',800)">Add</button>
   </div>
 
   <div class="card">
     <img src="thandai.jpg">
     <h3>Premium Holi Thandai</h3>
     <p>₹100 / Glass</p>
-    <button onclick="add('Thandai',100)">Add</button>
+    <button onclick="addItem('Thandai',100)">Add</button>
   </div>
 
   <div class="card">
     <img src="katorichaat.jpg">
     <h3>Special Katori Chaat</h3>
     <p>₹200 / Piece</p>
-    <button onclick="add('Katori Chaat',200)">Add</button>
+    <button onclick="addItem('Katori Chaat',200)">Add</button>
   </div>
 
   <div class="card">
     <img src="dahibhalle.jpg">
     <h3>Dahi Bhalle</h3>
     <p>₹175 / Plate</p>
-    <button onclick="add('Dahi Bhalle',175)">Add</button>
+    <button onclick="addItem('Dahi Bhalle',175)">Add</button>
   </div>
 </div>
 
-<div class="toggle" onclick="toggleCart()">🛒 Cart</div>
-<div class="cart" id="cartBox" style="display:none;">
-<h3>Your Cart</h3>
-<div id="cart"></div>
-<h4>Total ₹ <span id="total">0</span></h4>
+<div class="footer">
+  <h3>Delivery Partners</h3>
+  <button disabled>Zomato – Coming Soon</button>
+  <button disabled>Swiggy – Coming Soon</button>
+</div>
 
-<h4>Customer Details</h4>
-<input id="name" placeholder="Full Name">
-<input id="phone" placeholder="WhatsApp Number">
-<textarea id="addr" placeholder="Delivery Address"></textarea>
+<div class="cart-btn" onclick="toggleCart()">🛒 Cart</div>
 
-<h4>Scan & Pay</h4>
-<img src="./upiscanner.jpg" class="qr" alt="UPI QR Code">
-<p class="small">After payment, click Confirm Order</p>
-<button onclick="order()">Confirm Order</button>
+<div class="cart-popup" id="cartPopup">
+  <h3>Your Invoice</h3>
+  <div id="cartItems"></div>
+  <h4>Total ₹ <span id="total">0</span></h4>
+
+  <h4>Customer Details</h4>
+  <input id="custName" placeholder="Full Name">
+  <textarea id="custAddr" placeholder="Delivery Address"></textarea>
+
+  <h4>Scan & Pay</h4>
+  <img src="upiscanner.jpg" style="width:220px;display:block;margin:auto">
+  <p class="small">After payment, click Confirm Order</p>
+
+  <button onclick="placeOrder()">Confirm Order</button>
 </div>
 
 <script>
 let cart = {};
-let cartVisible = false;
+let cartOpen = false;
 
-function add(name, function add(name, price){
-  if(!cart[name]){
-    cart[name] = { price: price, qty: 1 };
-  } else {
-    cart[name].qty += 1;
-  }
-  draw();
-  showCart();
-}qty += 1;
-  draw();
-  showCart();
+function addItem(name, price){
+  if(!cart[name]) cart[name] = {price:price, qty:0};
+  cart[name].qty++;
+  renderCart();
+  cartOpen = true;
+  document.getElementById('cartPopup').style.display='block';
 }
 
-function draw(){
-  let html = '';
-  let total = 0;
+function renderCart(){
+  let html='';
+  let total=0;
   for(let i in cart){
-    let item = cart[i];
-    let amt = item.qty * item.price;
+    let amt = cart[i].qty * cart[i].price;
     total += amt;
-    html += `<div class="item"><span>${i} x ${item.qty}</span><span>₹${amt}</span></div>`;
+    html += `<div class="cart-item"><span>${i} x ${cart[i].qty}</span><span>₹${amt}</span></div>`;
   }
-  if(!html) html = '<p class="small">Cart is empty</p>';
-  document.getElementById('cart').innerHTML = html;
-  document.getElementById('total').innerText = total;
-} x ${item.qty}<span>₹${amt}</span></div>`;
-  }
-  document.getElementById('cart').innerHTML = html || '<p>No items</p>';
+  if(!html) html='<p class="small">Cart is empty</p>';
+  document.getElementById('cartItems').innerHTML = html;
   document.getElementById('total').innerText = total;
 }
 
-function order(){
- function order(){
-  let n = name.value.trim();
-  let p = phone.value.trim();
-  let a = addr.value.trim();
-  if(!n || !p || !a){ alert('Please fill all customer details'); return; }
-  if(Object.keys(cart).length === 0){ alert('Cart is empty'); return; }
+function toggleCart(){
+  cartOpen = !cartOpen;
+  document.getElementById('cartPopup').style.display = cartOpen ? 'block' : 'none';
+}
+
+function placeOrder(){
+  let name = document.getElementById('custName').value.trim();
+  let addr = document.getElementById('custAddr').value.trim();
+  if(!name || !addr){ alert('Name and address are required'); return; }
+  if(Object.keys(cart).length===0){ alert('Cart is empty'); return; }
 
   let total = document.getElementById('total').innerText;
   let msg = `*Mankhush Home Delights*%0A🧾 Invoice%0A`;
   for(let i in cart){
     msg += `${i} x ${cart[i].qty} = ₹${cart[i].qty*cart[i].price}%0A`;
   }
-  msg += `%0A💰 Total: ₹${total}%0A%0A👤 ${n}%0A📞 ${p}%0A🏠 ${a}%0A%0A✅ Payment Done`;
-  window.open('https://wa.me/918209520964?text=' + encodeURIComponent(msg),'_blank');
-}ment.getElementById('total').innerText;
-  let msg = `*Mankhush Home Delights*%0A%0A🧾 Invoice:%0A`;
-  for(let i in cart){
-    msg += `${i} x ${cart[i].qty} = ₹${cart[i].qty*cart[i].price}%0A`;
-  }
-  msg += `%0A💰 Total: ₹${total}%0A%0A👤 Name: ${n}%0A📞 Phone: ${p}%0A🏠 Address: ${a}%0A%0A✅ Payment Done`;
-  let url = 'https://wa.me/918209520964?text=' + encodeURIComponent(msg);
-  window.open(url,'_blank');
-}
-
-function toggleCart(){
-  cartVisible = !cartVisible;
-  document.getElementById('cartBox').style.display = cartVisible ? 'block' : 'none';
-}
-function showCart(){
-  cartVisible = true;
-  document.getElementById('cartBox').style.display = 'block';
-}
-  let total = document.getElementById('total').innerText;
-  let msg = `*Manjhush Home Delights*%0A%0AInvoice:%0A`;
-  for(let i in cart){
-    msg += `${i} x ${cart[i].qty} = ₹${cart[i].qty*cart[i].price}%0A`;
-  }
-  msg += `%0ATotal: ₹${total}%0A%0AName: ${n}%0APhone: ${p}%0AAddress: ${a}%0A%0APayment Done ✅`;
-  window.open(`https://wa.me/918209520964?text=${msg}`,'_blank');
+  msg += `%0A💰 Total: ₹${total}%0A%0A👤 ${name}%0A🏠 ${addr}%0A%0A✅ Payment Done`;
+  window.open('https://wa.me/918209520964?text='+encodeURIComponent(msg),'_blank');
 }
 </script>
 </body>
