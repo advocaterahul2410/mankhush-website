@@ -11,7 +11,8 @@ header{background:#ff6b00;color:#fff;padding:18px;text-align:center;font-size:24
 .card{background:#fff;border-radius:14px;padding:15px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
 .card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
 button{background:#ff6b00;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
-.cart{position:fixed;right:15px;top:80px;background:#fff;width:320px;padding:15px;border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,.2);max-height:70vh;overflow:auto}
+.cart{position:fixed;right:0;top:50%;transform:translateY(-50%);background:#fff;width:300px;padding:12px;border-radius:14px 0 0 14px;box-shadow:-3px 0 12px rgba(0,0,0,.2);max-height:80vh;overflow:auto}
+.toggle{position:fixed;right:0;top:50%;transform:translateY(-50%);background:#ff6b00;color:#fff;padding:10px;border-radius:10px 0 0 10px;cursor:pointer;font-weight:bold}
 .qr{width:220px;display:block;margin:10px auto}
 input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1px solid #ccc}
 .small{font-size:13px;color:#666}
@@ -51,7 +52,8 @@ input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1p
   </div>
 </div>
 
-<div class="cart">
+<div class="toggle" onclick="toggleCart()">🛒 Cart</div>
+<div class="cart" id="cartBox" style="display:none;">
 <h3>Your Cart</h3>
 <div id="cart"></div>
 <h4>Total ₹ <span id="total">0</span></h4>
@@ -96,6 +98,20 @@ function order(){
   if(!n||!p||!a||Object.keys(cart).length==0){
     alert('Please fill all details and add items');return;
   }
+  let total = document.getElementById('total').innerText;
+  let msg = `*Mankhush Home Delights*%0A%0A🧾 Invoice:%0A`;
+  for(let i in cart){
+    msg += `${i} x ${cart[i].qty} = ₹${cart[i].qty*cart[i].price}%0A`;
+  }
+  msg += `%0A💰 Total: ₹${total}%0A%0A👤 Name: ${n}%0A📞 Phone: ${p}%0A🏠 Address: ${a}%0A%0A✅ Payment Done`;
+  let url = 'https://wa.me/918209520964?text=' + encodeURIComponent(msg);
+  window.open(url,'_blank');
+}
+
+function toggleCart(){
+  let box = document.getElementById('cartBox');
+  box.style.display = box.style.display==='none' ? 'block' : 'none';
+}
   let total = document.getElementById('total').innerText;
   let msg = `*Manjhush Home Delights*%0A%0AInvoice:%0A`;
   for(let i in cart){
