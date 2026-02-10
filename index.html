@@ -1,140 +1,82 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Mankhush Homemade Delights</title>
+<title>Mano Shanti – Order Online</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-
 <style>
-body{margin:0;font-family:Poppins;background:#fff7f0;color:#333}
-header{background:#8b0000;color:white;text-align:center;padding:20px}
-.container{max-width:1100px;margin:auto;padding:20px}
-.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
-.card{background:white;border-radius:18px;box-shadow:0 8px 20px rgba(0,0,0,.1);padding:15px}
-.card img{width:100%;height:200px;object-fit:cover;border-radius:14px}
-button{background:#8b0000;color:white;border:none;padding:10px 16px;border-radius:12px;cursor:pointer}
-.cart{position:fixed;bottom:20px;right:20px;background:black;color:white;padding:15px 20px;border-radius:16px;font-weight:600}
-footer{text-align:center;padding:20px;background:#111;color:white}
+body{font-family:Arial;background:#fafafa;margin:0}
+header{background:#fff;padding:15px;display:flex;justify-content:space-between}
+.menu{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px;padding:20px}
+.card{background:#fff;padding:10px;border-radius:10px;box-shadow:0 2px 6px rgba(0,0,0,.1)}
+.card img{width:100%;height:150px;object-fit:cover;border-radius:8px}
+button{background:#000;color:#fff;border:none;padding:8px 12px;border-radius:5px}
+.cart{background:#fff;margin:20px;padding:15px;border-radius:10px}
+.apps img{height:30px;opacity:.6}
 </style>
 </head>
+
 <body>
 
 <header>
-<h1>Mankhush Homemade Delights</h1>
-<p>Pure Veg | Banaras Special Taste</p>
+<h2>MANO SHANTI</h2>
+<div class="apps">
+<img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Zomato_logo.png">
+<img src="https://upload.wikimedia.org/wikipedia/commons/1/13/Swiggy_logo.png">
+<div style="font-size:12px">Coming Soon</div>
+</div>
 </header>
 
-<div class="container">
-<h2>Menu</h2>
 <div class="menu" id="menu"></div>
 
-<h3>Pay via UPI</h3>
-<img src="upi-qr.jpg" width="250" alt="UPI QR">
-<p>GPay | PhonePe | Paytm</p>
-
-<h3>Delivery Partners</h3>
-<p>Zomato – Coming Soon | Swiggy – Coming Soon</p>
-
-<button onclick="payNow()">Pay & Place Order</button>
+<div class="cart">
+<h3>Cart</h3>
+<div id="cartItems"></div>
+<h3>Total ₹<span id="total">0</span></h3>
+<button onclick="orderWhatsApp()">Order on WhatsApp</button>
 </div>
 
-<div class="cart" id="cart">Cart: ₹0</div>
-
-<footer>
-<p>Order WhatsApp: 8209520964</p>
-</footer>
-
 <script>
+const phone="91XXXXXXXXXX"; // your WhatsApp number
 
-/* ===== CONFIG ===== */
-const WHATSAPP="918209520964";
-const SHEET_URL="PASTE_GOOGLE_SCRIPT_URL";
-const RAZORPAY_KEY="RAZORPAY_KEY_ID";
-
-/* ===== MENU DATA ===== */
-
-const menuItems=[
-{
-name:"Desi Ghee Gujiya",
-price:800,
-img:"https://images.unsplash.com/photo-1617191518004-6e4f6c7d4290"
-},
-{
-name:"Premium Holi Thandai",
-price:100,
-img:"https://images.unsplash.com/photo-1589308078055-4c2c04b45c30"
-},
-{
-name:"Banarasi Tea",
-price:25,
-img:"https://images.unsplash.com/photo-1509042239860-f550ce710b93"
-},
-{
-name:"Special Katori Chaat (Min 10)",
-price:200,
-img:"https://images.unsplash.com/photo-1601050690597-df0568f70950"
-},
-{
-name:"Dahi Bhalle",
-price:175,
-img:"https://images.unsplash.com/photo-1627308595229-7830a5c91f9f"
-}
+const items=[
+{name:"Dahi Bhalla",price:200,img:"https://upload.wikimedia.org/wikipedia/commons/3/36/Dahi_Bhalla.jpg"},
+{name:"Katori Chaat (min 10)",price:2000,img:"https://upload.wikimedia.org/wikipedia/commons/5/5e/Katori_chaat.jpg"},
+{name:"Premium Thandai",price:150,img:"https://upload.wikimedia.org/wikipedia/commons/9/9d/Thandai.jpg"},
+{name:"Desi Ghee Gujiya (1kg)",price:800,img:"https://upload.wikimedia.org/wikipedia/commons/7/73/Gujiya.jpg"}
 ];
 
-/* ===== CART ===== */
 let cart=[];
-let total=0;
 
-const menuDiv=document.getElementById("menu");
-
-menuItems.forEach((item,index)=>{
-menuDiv.innerHTML+=`
+function render(){
+const m=document.getElementById("menu");
+items.forEach(i=>{
+m.innerHTML+=`
 <div class="card">
-<img src="${item.img}?auto=format&fit=crop&w=800&q=80">
-<h3>${item.name}</h3>
-<p>₹${item.price}</p>
-<button onclick="addToCart(${index})">Add To Cart</button>
-</div>`;
-});
-
-function addToCart(i){
-cart.push(menuItems[i]);
-total+=menuItems[i].price;
-document.getElementById("cart").innerText="Cart: ₹"+total;
+<img src="${i.img}">
+<h4>${i.name}</h4>
+₹${i.price}<br><br>
+<button onclick='add(${JSON.stringify(i)})'>Add</button>
+</div>`});
 }
 
-/* ===== PAYMENT ===== */
+function add(i){cart.push(i);update()}
 
-function payNow(){
-
-if(total<=0){alert("Add items first");return;}
-
-var options={
-key:RAZORPAY_KEY,
-amount:total*100,
-currency:"INR",
-name:"Mankhush Homemade Delights",
-handler:function(response){
-
-/* Save Order */
-fetch(SHEET_URL,{method:"POST",body:JSON.stringify({
-order:cart,
-amount:total,
-payment:response.razorpay_payment_id
-})});
-
-/* WhatsApp Confirm */
-window.open(`https://wa.me/${WHATSAPP}?text=Order Confirmed | Amount ₹${total} | Payment ID ${response.razorpay_payment_id}`);
-
-}
-};
-
-new Razorpay(options).open();
+function update(){
+let t=0;document.getElementById("cartItems").innerHTML="";
+cart.forEach(i=>{t+=i.price;cartItems.innerHTML+=`${i.name} – ₹${i.price}<br>`});
+total.innerText=t;
 }
 
+function orderWhatsApp(){
+let invoice=`MANO SHANTI%0AInvoice No: MS-${Date.now()}%0A%0A`;
+let total=0;
+cart.forEach(i=>{invoice+=`${i.name} – ₹${i.price}%0A`;total+=i.price});
+invoice+=`%0ATotal: ₹${total}%0APlease share payment confirmation.`;
+window.open(`https://wa.me/${phone}?text=${invoice}`);
+}
+
+render();
 </script>
+
 </body>
 </html>
