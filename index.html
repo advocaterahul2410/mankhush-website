@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Mankhush Home Delights</title>
+<title>Manjhush Home Delights</title>
 <style>
 body{font-family:Arial;margin:0;background:#fff7f0}
 header{background:#ff6b00;color:#fff;padding:18px;text-align:center;font-size:24px;font-weight:bold}
@@ -11,7 +11,7 @@ header{background:#ff6b00;color:#fff;padding:18px;text-align:center;font-size:24
 .card{background:#fff;border-radius:14px;padding:15px;box-shadow:0 3px 10px rgba(0,0,0,.1)}
 .card img{width:100%;height:220px;object-fit:cover;border-radius:10px}
 button{background:#ff6b00;color:#fff;border:none;padding:10px 14px;border-radius:8px;cursor:pointer;margin-top:8px}
-.cart{position:fixed;right:15px;bottom:15px;background:#fff;width:320px;padding:15px;border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,.2);max-height:90vh;overflow:auto}
+.cart{position:fixed;right:15px;top:80px;background:#fff;width:320px;padding:15px;border-radius:14px;box-shadow:0 3px 12px rgba(0,0,0,.2);max-height:70vh;overflow:auto}
 .qr{width:220px;display:block;margin:10px auto}
 input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1px solid #ccc}
 .small{font-size:13px;color:#666}
@@ -62,7 +62,7 @@ input,textarea{width:100%;padding:8px;margin-top:6px;border-radius:6px;border:1p
 <textarea id="addr" placeholder="Delivery Address"></textarea>
 
 <h4>Scan & Pay</h4>
-<img src="upiscanner.jpg" class="qr">
+<img src="./upiscanner.jpg" class="qr" alt="UPI QR Code">
 <p class="small">After payment, click Confirm Order</p>
 <button onclick="order()">Confirm Order</button>
 </div>
@@ -97,12 +97,12 @@ function order(){
     alert('Please fill all details and add items');return;
   }
   let total = document.getElementById('total').innerText;
-  let msg = `*Mankhush Home Delights*%0A%0AInvoice:%0A`;
+  let msg = `*Manjhush Home Delights*%0A%0AInvoice:%0A`;
   for(let i in cart){
     msg += `${i} x ${cart[i].qty} = ₹${cart[i].qty*cart[i].price}%0A`;
   }
   msg += `%0ATotal: ₹${total}%0A%0AName: ${n}%0APhone: ${p}%0AAddress: ${a}%0A%0APayment Done ✅`;
-  window.open(`https://wa.me/91${p}?text=${msg}`,'_blank');
+  window.open(`https://wa.me/918209520964?text=${msg}`,'_blank');
 }
 </script>
 </body>
